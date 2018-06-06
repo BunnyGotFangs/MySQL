@@ -1,0 +1,20 @@
+﻿product_id,product_name,department_id,price,stock_quantity
+101,English Saddle,2,3750.00,5
+102,Western Saddle,2,5700.00,2
+103,Hard Brush,1,7.50,10
+104,Soft Brush,1,9.50,9
+105,Thrush Buster,4,12.00,3
+106,Absorbine,4,15.75,5
+107,BluePoo,1,11.95,6
+108,Cowboy Magic,1,12.50,12
+109,Fuerezone,4,24.95,8
+110,Tall Boots,3,1250.00,2
+111,Paddock Boots,3,295.00,8
+112,Jacket,3,395.00,4
+113,Britches,3,145.00,15
+114,English Bridle,2,95.00,6
+115,Western Bridle,2,205.00,2
+116,Braiding Bands,5,5.95,10
+117,Socks,5,6.95,12
+118,Keychain,5,10.00,9
+119,Stickers,5,4.95,45
