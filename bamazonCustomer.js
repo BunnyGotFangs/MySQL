@@ -33,7 +33,8 @@ function runMenu() {
     })
 
     .then(function(answer) {
-      switch (answer.action) {
+      //console.log (answer);
+      switch (answer.menu) {
       case "Display products":
         displayProducts();
         break;
@@ -47,8 +48,10 @@ function runMenu() {
 }
 
 function displayProducts() {
-    inquirer
-    .then (function(answer){
+  //console.log ("are you working");
+
+    
+     // console.log("then function is found");
 
         var query = "SELECT products.item_id, products.product_name, departments.department_name, products.price, products.stock_quantity FROM products JOIN departments ON (products.department_id = departments.department_id) ";
     
@@ -59,14 +62,12 @@ function displayProducts() {
 
           console.log("Product ID: " + response[i].item_id + " || Product Name: " + response[i].product_name + " || Department: " + response[i].department_name + " || Price: " + response[i].price + " || Current Quantity: " + response[i].stock_quantity );
         }
-        buyProduct();
+        buyProduct(response);
       });
-  
-});
-}
+  }
 
 
-function buyProduct() {
+function buyProduct(results) {
   inquirer
     .prompt([
       {
@@ -93,28 +94,30 @@ function buyProduct() {
       }
     ])
     .then(function(answer) {
-        var prodQnty;
+      console.log (answer)
+        var stockItem;
+
         for (var i = 0; i < results.length; i++) {
-          if (results[i].item_id === answer.id) {
-            prodQnty = results[i];
+          if (results[i].item_id == answer.id) {
+            stockItem = results[i];
           }
         }
 
-        if (prodQnty.qnty < parseInt(answer.stock_quantity)) {
+        if(answer.qnty < parseInt(stockItem.stock_quantity)) {
 
           connection.query(
             "UPDATE products SET ? WHERE ?",
             [
               {
-                stock_quantity: (stock_quantity - prodQnty.qnty)
+                stock_quantity: (stockItem.stock_quantity - answer.qnty)
               },
               {
-                item_id: prodQnty.id
+                item_id: answer.id
               }
             ],
             function(error) {
               if (error) throw error;
-              console.log("Your order total is: " + (prodQnty * answer.price) );
+              console.log("Your order total is: " + (answer.qnty * stockItem.price) );
               console.log("Your Order Is Complete");
               console.log("We appreacite your order and hope you enjoy your product. Please vist us again soon.");
               
