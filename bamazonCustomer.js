@@ -94,7 +94,7 @@ function buyProduct(results) {
       }
     ])
     .then(function(answer) {
-      console.log (answer)
+      //console.log (answer)
         var stockItem;
 
         for (var i = 0; i < results.length; i++) {
